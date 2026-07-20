@@ -51,11 +51,12 @@ public class LinkedList {
 			current_node.next = new_Node;
 		}
 	}
+
 	public void remove(int position) {
 		if (position == 0) {
 			Node current_node = head;
 			head = current_node.next;
-		}else {
+		} else {
 			Node current_node = head;
 			int current_position = 0;
 			while (current_node.next != null && current_position < position - 1) {
@@ -65,12 +66,12 @@ public class LinkedList {
 			current_node.next = current_node.next.next;
 		}
 	}
-	
+
 	public void removeLastElement() {
-		if(head != null) {
+		if (head != null) {
 			if (head.next == null) {
 				head = null;
-			}else {
+			} else {
 				Node current_node = head;
 				while (current_node.next.next != null) {
 					current_node = current_node.next;
@@ -79,22 +80,47 @@ public class LinkedList {
 			}
 		}
 	}
+
 	public int length() {
-		return 0;
+		int count = 0;
+		Node current_node = head;
+		while (current_node != null) {
+			count++;
+			current_node = current_node.next;
+		}
+		return count;
 	}
+
 	public Object get(int position) {
+		Node current_node = head;
+		int current_position = 0;
+		while (current_node != null && current_position < position) {
+			current_node = current_node.next;
+			current_position++;
+		}
+		if (current_node != null) {
+			return current_node.data;
+		}
 		return null;
 	}
-	public void set(int position,Object value) {
+
+	public void set(int position, Object value) {
 		// update data in node at the position
+		Node current_node = head;
+		int current_position = 0;
+
+		while (current_node != null && current_position < position) {
+			current_node = current_node.next;
+			current_position++;
+		}
+
+		if (current_node != null) {
+			current_node.data = value;
+		}
 	}
+
 	public void clear() {
 		head = null;
 	}
-	
-	
-	
-	
-	
-	
+
 }

@@ -7,20 +7,34 @@ public class NumberLinkedList {
 		numbers.insert(0, 4);
 		numbers.insert(0, 16);
 		System.out.println("All elements =" + numbers.traversal());
-		
+
 		numbers.insert(2, 20);
 		System.out.println("Insert 20 to index " + numbers.traversal());
-		
+
 		numbers.insert(25);
-		System.out.println("" + numbers.traversal());
-		
+		System.out.println("Append 25 into list  = " + numbers.traversal());
+
 		numbers.remove(0);
-		System.out.println("" + numbers.traversal());
-		
+		System.out.println("Deleted the first element  = " + numbers.traversal());
+
 		numbers.remove(2);
-		System.out.println("" + numbers.traversal());
-		
+		System.out.println("Deleted element index 2  = " + numbers.traversal());
+
 		numbers.removeLastElement();
-		System.out.println("" + numbers.traversal());
+		System.out.println("Deleted the last element  = " + numbers.traversal());
+
+		System.out.println();
+		numbers.length();
+		System.out.println("Length of elements in List= " + numbers.length());
+
+		numbers.get(1);
+		System.out.println("Element in index 1 = " + numbers.get(1));
+
+		numbers.set(1, 100);
+		System.out.println("Update index 1 to 100 = " + numbers.traversal());
+
+		numbers.clear();
+		System.out.println("Clear linked list = " + numbers.traversal());
+
 	}
 }
