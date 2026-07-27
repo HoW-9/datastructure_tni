@@ -19,10 +19,22 @@ public class BrowserHistory {
 		history.add("claude.ai ");        
 		System.out.println(history);         
 		
-		history.remove("youtube.com");        
+		history.remove(1);        
 		System.out.println(history);         
 		
-		System.out.println(history.getLast());      
+		System.out.println(history.getLast()); 
+		 System.out.println("current page = " + history.getLast());
+//			System.out.println("current page = " + cart.peekLast());
+
+	        System.out.println("Visited youtube.com = " + history.contains("youtube.com"));
+
+
+	        System.out.println("Go back to previous page = " + history.get(history.size() - 2));
+
+	        System.out.println("Go back to previous page again = " + history.get(history.size() - 3));
+
+	        history.clear();
+	        System.out.println(history);
 	}
 
 }
