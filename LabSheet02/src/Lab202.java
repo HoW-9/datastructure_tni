@@ -30,7 +30,7 @@ public class Lab202 {
 	        numbers.set(update, newValue);
 	        System.out.println("ผลลัพธ์สุดท้าย");
 	        System.out.println(numbers);
-
+	        sc.close();
 	}
 
 }
