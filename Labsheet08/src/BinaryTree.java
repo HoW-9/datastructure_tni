@@ -1,8 +1,14 @@
+import java.awt.Insets;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
 
 public class BinaryTree {
 
 	private Node root;
-
+	private Node parent; // delete
+	private Node deleteNode;
+	
 	public BinaryTree() {
 		root = null;
 	}
@@ -10,7 +16,8 @@ public class BinaryTree {
 	public Node getRoot() {
 		return root;
 	}
-
+	public Node getparent() {		return parent;	}
+	public Node getdeleteNode() {		return deleteNode;	}
 	public void printTree(Node node, int depth) {
 		if (node != null) {
 			printTree(node.right, depth + 1);
@@ -49,5 +56,183 @@ public class BinaryTree {
 		root.right.right = new Node(24);
 		root.right.right.left = new Node(23);
 	}
+	public void createTree4() {
+		int[] nums = {10, 8, 15, 2, 9, 18, 14, 20, 11, 17};
+		for(int i : nums) {
+			insert(i);
+		}
+	}
+	public void createTree5() {
+		int[] nums = {50,30,70,10,40,60,20,45,55,65,25};	
+		for(int i : nums) {
+			insert(i);
+		}
+ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		if (root != null) {
+			Queue<Node> queue = new ArrayDeque<Node>();
+			queue.add(root);
+			
+			while (!queue.isEmpty()) {
+				int levelSize = queue.size();
+				
+				for (int i =0; i<levelSize; i++) {
+					Node current_node = queue.poll();
+					if (current_node.left != null) {
+						queue.add(current_node.left);
+					}
+					if (current_node.right!= null) {
+						queue.add(current_node.right);
+					}
+					list.add(current_node.data);
+				}
+				}
+			}
+	}
+	public void createTree6() {
+		int[] nums = {40,20,70,30,55,85,25,35,80,32};	
+		for(int i : nums) {
+			insert(i);
+		}
+ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		if (root != null) {
+			Queue<Node> queue = new ArrayDeque<Node>();
+			queue.add(root);
+			
+			while (!queue.isEmpty()) {
+				int levelSize = queue.size();
+				
+				for (int i =0; i<levelSize; i++) {
+					Node current_node = queue.poll();
+					if (current_node.left != null) {
+						queue.add(current_node.left);
+					}
+					if (current_node.right!= null) {
+						queue.add(current_node.right);
+					}
+					list.add(current_node.data);
+				}
+				}
+			}
+	}
+	public void insert(int new_data) {
+		if(root == null) {
+			root = new Node(new_data);
+		}else {
+			Node current_node = root;
+			while (true) {
+				if(new_data < current_node.data) {
+					if(current_node.left == null) {
+						current_node.left = new Node(new_data);
+						break;
+					}
+					current_node = current_node.left;
+				}else {
+					if(current_node.right == null) {
+						current_node.right = new Node(new_data);
+						break;
+					}
+					current_node = current_node.right;
+				}
+			}//end while
+		}//end outer else
+	}
+	public void searchDeleteNode(int traget) {
+		
+		Queue<Node> queue = new ArrayDeque<Node>();
+		
+		queue.add(root);
+		
+		while (!queue.isEmpty()) {
+			
+			//queue = [10]
+			int levelSize = queue.size();
+			Node current_node = queue.poll(); //current_node = 10
+			
+			parent = current_node; // pa= 10
+			if(parent.data == traget) {
+				deleteNode = parent;
+				break;
+			}
+			for(int i=0; i<levelSize;i++) {
+				if(current_node.left !=null) {
+					if(current_node.left.data == traget) {
+						deleteNode = current_node.left;
+						queue.clear();
+						break;
+					}
+					queue.add(current_node.left);//update q = 8
+				}
+				if(current_node.right !=null) {
+					if(current_node.right.data == traget) {
+						deleteNode = current_node.right;
+						queue.clear();
+						break;
+					}
+					queue.add(current_node.right);
+			}
+				}
+			
+		}//end while
+		System.out.println("Parent = " + parent.data);
+		System.out.println("DeleteNode = " + deleteNode.data);
+	}
+	public void delete(int traget) {
+		searchDeleteNode(traget);
+		
+		if (root == null) {
+			System.out.println("Empty tree");
+		} else if (deleteNode == null) {
+			System.out.println("annot found data");
+		}else {
+			//ca1
+			if(deleteNode.left == null && deleteNode.right == null) {
+				if(parent.left != null && parent.left.data == deleteNode.data) {
+					parent.left = null;
+				} else {
+					parent.right = null;
+				}
+			}
+			//ca2 delete 2 child
+			else if (deleteNode.left != null && deleteNode.right != null) {
+				Node succesorParent = deleteNode;
+				Node succesor = deleteNode.right;
+				
+				while (succesor.left != null) {
+					succesorParent = succesor;
+					succesor = succesor.left;
+				}
+				
+				deleteNode.data = succesor.data;
+				
+				if(succesorParent.left == succesor) {
+					succesorParent.left = succesor.right;
+				}else {
+					succesorParent.right = succesor.right;
+				}
+				
+				
+			}
+			//ca3 delete 1 child
+			else {
+				if(deleteNode.left != null) {
+					if(parent.left != null && parent.left.data == deleteNode.data) {
+						parent.left = deleteNode.left;
+					}else {
+						parent.right = deleteNode.left;
+					}
+				}else {
+					if(parent.left != null && parent.left.data == deleteNode.data) {
+						parent.left = deleteNode.right;
+					}else {
+						parent.right = deleteNode.right;
+					}
+				}
+			}
+			
+		}//end outer else
+		
+	}//end method
 	
 }
