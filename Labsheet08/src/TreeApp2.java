@@ -24,8 +24,7 @@ public class TreeApp2 {
 		tree3.createTree6();
 		tree3.printTree(tree3.getRoot(), 0);
 		
-		System.out.println();
-		tree.searchDeleteNode(11);
+		
 	}
 
 }

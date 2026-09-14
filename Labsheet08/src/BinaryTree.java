@@ -67,55 +67,14 @@ public class BinaryTree {
 		for(int i : nums) {
 			insert(i);
 		}
-ArrayList<Integer> list = new ArrayList<Integer>();
-		
-		if (root != null) {
-			Queue<Node> queue = new ArrayDeque<Node>();
-			queue.add(root);
-			
-			while (!queue.isEmpty()) {
-				int levelSize = queue.size();
-				
-				for (int i =0; i<levelSize; i++) {
-					Node current_node = queue.poll();
-					if (current_node.left != null) {
-						queue.add(current_node.left);
-					}
-					if (current_node.right!= null) {
-						queue.add(current_node.right);
-					}
-					list.add(current_node.data);
-				}
-				}
-			}
 	}
 	public void createTree6() {
 		int[] nums = {40,20,70,30,55,85,25,35,80,32};	
 		for(int i : nums) {
 			insert(i);
 		}
-ArrayList<Integer> list = new ArrayList<Integer>();
 		
-		if (root != null) {
-			Queue<Node> queue = new ArrayDeque<Node>();
-			queue.add(root);
-			
-			while (!queue.isEmpty()) {
-				int levelSize = queue.size();
-				
-				for (int i =0; i<levelSize; i++) {
-					Node current_node = queue.poll();
-					if (current_node.left != null) {
-						queue.add(current_node.left);
-					}
-					if (current_node.right!= null) {
-						queue.add(current_node.right);
-					}
-					list.add(current_node.data);
-				}
-				}
 			}
-	}
 	public void insert(int new_data) {
 		if(root == null) {
 			root = new Node(new_data);
